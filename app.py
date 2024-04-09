@@ -1,5 +1,4 @@
-from flask import Flask, request, render_template, jsonify
-import json
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -9,20 +8,20 @@ def welcome():
 
 @app.route('/calc', methods = ["GET"])
 def math_opp():
-    number1 = request.json("number1")
-    number2 = request.json("number2")
-    operation = request.json("operation") #requesting from postman JSON
-
-    if operation == 'add':
-        result = number1 + number2
-    elif operation == 'multiply':
-        result = number1 * number2
-    elif operation == 'division':
-        result = number1/number2 
-    else:
-        result = number1 - number2
+    operation = request.json["operation"] #requesting from postman JSON
+    number1 = request.json["number1"]
+    number2 = request.json["number2"]
     
-    return  jsonify(result)
+    if operation == 'add':
+        result = int(number1)+int(number2)
+    elif operation == 'multiply':
+        result = int(number1)*int(number2)
+    elif operation == 'division':
+        result = int(number1)/int(number2) 
+    else:
+        result = int(number1)-int(number2)
+    
+    return  "The operation is {} and the result is {}".format(operation, result)
 
 print(__name__)
 
