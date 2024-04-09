@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
+import json
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ def math_opp():
     else:
         result = number1 - number2
     
-    return  result
+    return  jsonify(result)
 
 print(__name__)
 
